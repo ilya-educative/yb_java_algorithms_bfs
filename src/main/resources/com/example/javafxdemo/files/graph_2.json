@@ -1,0 +1,108 @@
+{
+  "nodes": [
+    {
+      "node": "A",
+      "neighbours": ["B", "F"]
+    },
+    {
+      "node": "B",
+      "neighbours": ["A", "C", "G"]
+    },
+    {
+      "node": "C",
+      "neighbours": ["B","D", "H"]
+    },
+    {
+      "node": "D",
+      "neighbours": ["C","E", "I"]
+    },
+    {
+      "node": "E",
+      "neighbours": ["D","J"]
+    },
+
+    {
+      "node": "F",
+      "neighbours": ["A","G", "K"]
+    },
+    {
+      "node": "G",
+      "neighbours": ["B","F","H", "L"]
+    },
+    {
+      "node": "H",
+      "neighbours": ["C","G","I", "M"]
+    },
+    {
+      "node": "I",
+      "neighbours": ["D","H","J", "N"]
+    },
+    {
+      "node": "J",
+      "neighbours": ["E","I","O"]
+    },
+
+    {
+      "node": "K",
+      "neighbours": ["F","L", "P"]
+    },
+    {
+      "node": "L",
+      "neighbours": ["G","K","M", "Q"]
+    },
+    {
+      "node": "M",
+      "neighbours": ["H","L","N", "R"]
+    },
+    {
+      "node": "N",
+      "neighbours": ["I","M","O", "S"]
+    },
+    {
+      "node": "O",
+      "neighbours": ["J","N","T"]
+    },
+
+    {
+      "node": "P",
+      "neighbours": ["K","Q", "U"]
+    },
+    {
+      "node": "Q",
+      "neighbours": ["L","P","R", "V"]
+    },
+    {
+      "node": "R",
+      "neighbours": ["M","Q","S", "W"]
+    },
+    {
+      "node": "S",
+      "neighbours": ["N","R","T", "X"]
+    },
+    {
+      "node": "T",
+      "neighbours": ["S","O","Y"]
+    },
+
+    {
+      "node": "U",
+      "neighbours": ["P","V"]
+    },
+    {
+      "node": "V",
+      "neighbours": ["Q","U","W"]
+    },
+    {
+      "node": "W",
+      "neighbours": ["R","V","X"]
+    },
+    {
+      "node": "X",
+      "neighbours": ["S","W","Y"]
+    },
+    {
+      "node": "Y",
+      "neighbours": ["T","X"]
+    }
+  ]
+}

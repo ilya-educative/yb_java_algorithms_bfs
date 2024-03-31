@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "node": "A",
+      "neighbours": ["B", "C"]
+    },
+    {
+      "node": "B",
+      "neighbours": ["A", "D"]
+    },
+    {
+      "node": "C",
+      "neighbours": ["A", "E", "F", "G"]
+    },
+    {
+      "node": "D",
+      "neighbours": ["B"]
+    },
+    {
+      "node": "E",
+      "neighbours": ["C"]
+    },
+    {
+      "node": "F",
+      "neighbours": ["C"]
+    },
+    {
+      "node": "G",
+      "neighbours": ["G"]
+    }
+  ]
+}
