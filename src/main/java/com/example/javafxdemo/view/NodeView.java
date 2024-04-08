@@ -9,12 +9,12 @@ import javafx.scene.text.Text;
 public class NodeView extends Pane {
     public final Circle circle;
     public final Node node;
+    public double mouseX, mouseY;
 
     public NodeView(Node node) {
         this.node = node;
         this.circle = createCircle();
         addTextInCircle();
-        addOnMouseListeners();
         setLayout();
     }
 
@@ -32,23 +32,6 @@ public class NodeView extends Pane {
         text.translateXProperty().bind(circle.centerXProperty().subtract(text.layoutBoundsProperty().getValue().getWidth() / 2));
         text.translateYProperty().bind(circle.centerYProperty().add(text.layoutBoundsProperty().getValue().getHeight() / 4));
         getChildren().add(text);
-    }
-
-    private double mouseX, mouseY;
-
-    private void addOnMouseListeners() {
-        setOnMousePressed(event -> {
-            mouseX = event.getSceneX();
-            mouseY = event.getSceneY();
-        });
-        setOnMouseDragged(event -> {
-            double deltaX = event.getSceneX() - mouseX;
-            double deltaY = event.getSceneY() - mouseY;
-            setLayoutX(getLayoutX() + deltaX);
-            setLayoutY(getLayoutY() + deltaY);
-            mouseX = event.getSceneX();
-            mouseY = event.getSceneY();
-        });
     }
 
     //todo: Move setLayout method to GraphViewUtils.setLayoutForGraph();

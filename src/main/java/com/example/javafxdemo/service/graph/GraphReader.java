@@ -17,10 +17,10 @@ public class GraphReader {
         try (Reader reader = new FileReader(file)) {
             return gson.fromJson(reader, JsonGraph.class);
         } catch (JsonSyntaxException e) {
-            System.out.println("Wrong json syntax");
+            System.out.println("Wrong json syntax");//todo: EventManager.fireEvent(new ConsoleMessageEvent("wrong json syntax"));
             exception = e;
         } catch (IOException e) {
-            System.out.println("Can't read file");
+            System.out.println("Can't read file");//todo: EventManager.fireEvent(new ConsoleMessageEvent("can't read file"));
             exception = e;
         }
         throw new RuntimeException(exception);

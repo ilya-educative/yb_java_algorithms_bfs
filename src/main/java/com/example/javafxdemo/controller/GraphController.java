@@ -8,8 +8,10 @@ import com.example.javafxdemo.view.NodeView;
 import javafx.animation.SequentialTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
@@ -21,12 +23,15 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainController {
-    /* Utils */
-    @FXML private TextArea consoleTextArea;
-
-    public MainController() {
+public class GraphController {
+    public GraphController() {
         graphService = new GraphService();
+    }
+
+    public void initialize() {
+        addZooming();
+        addOnFileUpload();
+//        setGraphBFSButtonState();
     }
 
     /* Graph */
@@ -39,6 +44,11 @@ public class MainController {
     @FXML private TextArea graphDragAndDropTextArea;
     @FXML private Pane graphPlaygroundPane;
     @FXML private Button graphBFSButton;
+    @FXML private CheckBox graphFindPathCheckBox;
+    @FXML private CheckBox graphUseBlockedNodesCheckBox; // todo: blocked nodes must be used in BFS
+    @FXML private TextField graphFromNodeTextArea;
+    @FXML private TextField graphToNodeTextArea;
+    @FXML private TextField graphBlockedNodesTextArea;
 
     private void addZooming() {
         graphPlaygroundScrollPane.addEventFilter(ScrollEvent.SCROLL, event -> {
@@ -81,17 +91,22 @@ public class MainController {
         Node[] nodes = graphService.readNodes(filename);
         GraphViewUtils.clearGraph(graph, graphPlaygroundPane);
         GraphViewUtils.populateGraph(graph, nodes, graphPlaygroundPane);
-        GraphViewUtils.drawEdgesBetweenNodes(graph, GraphViewUtils.setNodeFromNodeA(graph), graphPlaygroundPane);
-        graphSequentialTransition = BreadthFirstTraversal.execute(graph, GraphViewUtils.setNodeFromNodeA(graph), consoleTextArea);
-        graphSequentialTransition.getChildren().forEach(animation -> animation.setDelay(Duration.millis(300)));
-        graphSequentialTransition.setOnFinished(event -> graphBFSButton.setText("Play"));
-        setGraphBFSButtonState();
+        GraphViewUtils.drawEdgesBetweenNodes(graph, GraphViewUtils.getFromAnyNode(graph), graphPlaygroundPane);
+        GraphViewUtils.graphAddNodeViewOnClickListener(graph, graphFromNodeTextArea, graphToNodeTextArea, graphBlockedNodesTextArea);
+//        setGraphBFSButtonState();
     }
     private void setGraphBFSButtonState() {
         graphBFSButton.setDisable(graphSequentialTransition == null);
     }
 
     public void onGraphBFSPlayButtonAction() {
+        if (graphSequentialTransition == null) {
+            graphSequentialTransition = BreadthFirstTraversal.execute(graph, graphFindPathCheckBox.isSelected(), graphUseBlockedNodesCheckBox.isSelected());
+            graphSequentialTransition.getChildren().forEach(animation -> animation.setDelay(Duration.millis(300)));
+            graphSequentialTransition.setOnFinished(event -> graphBFSButton.setText("Play"));
+//            setGraphBFSButtonState();
+        }
+
         if (onGraphBFSButtonPause) {
             graphBFSButton.setText("Pause");
             onGraphBFSButtonPause = false;
@@ -101,15 +116,5 @@ public class MainController {
             onGraphBFSButtonPause = true;
             graphSequentialTransition.pause();
         }
-    }
-
-    /* Matrix */
-
-
-
-    public void initialize() {
-        addZooming();
-        addOnFileUpload();
-        setGraphBFSButtonState();
     }
 }

@@ -3,11 +3,12 @@ package com.example.javafxdemo.service.bfs;
 import com.example.javafxdemo.animation.AnimationUtils;
 import com.example.javafxdemo.model.Node;
 import com.example.javafxdemo.model.NodeType;
+import com.example.javafxdemo.view.GraphViewUtils;
 import com.example.javafxdemo.view.NodeView;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
-import javafx.scene.control.TextArea;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,9 +19,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class BreadthFirstTraversal {
-    public static SequentialTransition execute(Map<Node, NodeView> graph, Node from, TextArea consoleTextArea) {
+    public static SequentialTransition execute(Map<Node, NodeView> graph, boolean findPath, boolean useBlockedNodes) {
         clearVisitedNodes(graph.keySet());
-        
+
         SequentialTransition sequentialTransition = new SequentialTransition();
 
         ParallelTransition parallelTransition = new ParallelTransition();
@@ -29,6 +30,14 @@ public class BreadthFirstTraversal {
                 .forEach(animation -> parallelTransition.getChildren().add(animation));
         sequentialTransition.getChildren().add(parallelTransition);
 
+        Node from;
+        Node to = null;
+        if (findPath) {
+            from = GraphViewUtils.getFromNode(graph).orElseThrow();
+            to = GraphViewUtils.getToNode(graph).orElseThrow();
+        } else {
+            from = GraphViewUtils.getFromAnyNode(graph);
+        }
         sequentialTransition.getChildren().add(AnimationUtils.fillCircle(graph.get(from).circle, NodeType.From));
 
         Queue<Node> queue = new LinkedList<>();
@@ -37,28 +46,49 @@ public class BreadthFirstTraversal {
         queue.offer(from);
         visited.add(from);
 
+        OuterWhile:
         while (!queue.isEmpty()) {
             Node node = queue.poll();
             node.isVisited = true;
-            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(consoleTextArea, iterationMessage(iteration++)));
-            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(consoleTextArea, visitedNodeMessage(node)));
+            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(iterationMessage(iteration++)));
+            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(visitedNodeMessage(node)));
             sequentialTransition.getChildren().add(AnimationUtils.fillCircle(graph.get(node).circle, NodeType.Visited));
 
             for (Node neighbour : node.neighbours) {
                 if (!visited.contains(neighbour)) {
                     queue.offer(neighbour);
                     visited.add(neighbour);
+                    neighbour.connectedTo = node;
                     sequentialTransition.getChildren().add(AnimationUtils.fillCircle(graph.get(neighbour).circle, NodeType.Neighbour));
                 }
+
+                if (findPath && neighbour.equals(to)) {
+                    List<Node> path = buildPath(neighbour, graph, sequentialTransition);
+                    sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(finalPathMessage(path)));
+                    break OuterWhile;
+                }
             }
-            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(consoleTextArea, neighboursMessage(node, List.of(node.neighbours))));
-            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(consoleTextArea, unvisitedNodesMessage(queue)));
+            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(neighboursMessage(node, List.of(node.neighbours))));
+            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(unvisitedNodesMessage(queue)));
         }
         return sequentialTransition;
     }
 
     private static void clearVisitedNodes(Collection<Node> nodes) {
         nodes.forEach(node -> node.isVisited = false);
+    }
+
+    private static List<Node> buildPath(Node node, Map<Node, NodeView> graph, SequentialTransition sequentialTransition) {
+        List<Node> path = new ArrayList<>();
+
+        while (node != null) {
+            path.add(node);
+            sequentialTransition.getChildren().add(AnimationUtils.fillCircle(graph.get(node).circle, NodeType.Path));
+            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(addNodeToPathMessage(node, path)));
+            node = node.connectedTo;
+        }
+
+        return path.reversed();
     }
 
     private static String iterationMessage(int iteration) {
@@ -78,5 +108,17 @@ public class BreadthFirstTraversal {
                 .map(Node::toString)
                 .collect(Collectors.joining("', '", "['", "']"));
         return String.format("Nodes left to visit %s", neighbours);
+    }
+    private static String addNodeToPathMessage(Node node, Collection<Node> path) {
+        String tmpPath = path.stream()
+                .map(Node::toString)
+                .collect(Collectors.joining("', '", "['", "']"));
+        return String.format("Node '%s' added to path %s", node.letter, tmpPath);
+    }
+    private static String finalPathMessage(Collection<Node> path) {
+        String finalPath = path.stream()
+                .map(Node::toString)
+                .collect(Collectors.joining("', '", "['", "']"));
+        return String.format("Final path %s", finalPath);
     }
 }

@@ -6,7 +6,9 @@ public class Node {
     public final char letter;
     public final Node[] neighbours;
 
+    public NodeType type = NodeType.Common;
     public boolean isVisited = false;
+    public Node connectedTo;
 
     public Node(char letter) {
         this.letter = letter;

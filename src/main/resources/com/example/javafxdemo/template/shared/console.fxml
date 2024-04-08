@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.javafxdemo.handler.ConsoleMessageHandler"
+            prefHeight="200.0" prefWidth="200.0">
+    <TextArea fx:id="consoleTextArea" editable="false" prefHeight="125.0" prefWidth="655.0"/>
+</ScrollPane>
