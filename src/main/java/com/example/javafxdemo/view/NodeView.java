@@ -15,7 +15,6 @@ public class NodeView extends Pane {
         this.node = node;
         this.circle = createCircle();
         addTextInCircle();
-        setLayout();
     }
 
     private Circle createCircle() {
@@ -32,14 +31,5 @@ public class NodeView extends Pane {
         text.translateXProperty().bind(circle.centerXProperty().subtract(text.layoutBoundsProperty().getValue().getWidth() / 2));
         text.translateYProperty().bind(circle.centerYProperty().add(text.layoutBoundsProperty().getValue().getHeight() / 4));
         getChildren().add(text);
-    }
-
-    //todo: Move setLayout method to GraphViewUtils.setLayoutForGraph();
-    private static double offset = 40.0;
-
-    private void setLayout() {
-        setLayoutX(offset);
-        setLayoutY(offset);
-        offset += 40.0;
     }
 }

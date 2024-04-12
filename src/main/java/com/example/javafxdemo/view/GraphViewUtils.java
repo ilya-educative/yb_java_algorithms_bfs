@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class GraphViewUtils {
@@ -52,9 +53,38 @@ public class GraphViewUtils {
         line.endYProperty().bind(target.layoutYProperty());
         pane.getChildren().addFirst(line);
     }
-
     public static void setLayoutForGraph(Map<Node, NodeView> graph, Pane graphPlaygroundPane) {
+        double coolingFactor = 0.95;
+        double repulsionFactor = 0.1;
+        int iterations = 1000;
+        double width = graphPlaygroundPane.getWidth();
+        double height = graphPlaygroundPane.getHeight();
 
+        Random random = new Random();
+        for (NodeView nodeView : graph.values()) {
+            nodeView.setLayoutX(random.nextDouble() * width);
+            nodeView.setLayoutY(random.nextDouble() * height);
+        }
+
+        for (int i = 0; i < iterations; i++) {
+            for (NodeView nodeView : graph.values()) {
+                double forceX = 0;
+                double forceY = 0;
+                for (NodeView otherNodeView : graph.values()) {
+                    if (nodeView != otherNodeView) {
+                        double dx = otherNodeView.getLayoutX() - nodeView.getLayoutX();
+                        double dy = otherNodeView.getLayoutY() - nodeView.getLayoutY();
+                        double distance = Math.sqrt(dx * dx + dy * dy);
+
+                        forceX -= repulsionFactor * dx / (distance * distance);
+                        forceY -= repulsionFactor * dy / (distance * distance);
+                    }
+                }
+                nodeView.setLayoutX(nodeView.getLayoutX() + forceX);
+                nodeView.setLayoutY(nodeView.getLayoutY() + forceY);
+            }
+            repulsionFactor *= coolingFactor;
+        }
     }
 
     public static void graphAddNodeViewOnClickListener(Map<Node, NodeView> graph, TextField graphFromNodeTextArea, TextField graphToNodeTextArea, TextField graphBlockedNodesTextArea) {

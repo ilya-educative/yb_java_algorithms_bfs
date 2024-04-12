@@ -92,6 +92,7 @@ public class GraphController {
         GraphViewUtils.populateGraph(graph, nodes, graphPlaygroundPane);
         GraphViewUtils.drawEdgesBetweenNodes(graph, GraphViewUtils.getFromAnyNode(graph), graphPlaygroundPane);
         GraphViewUtils.graphAddNodeViewOnClickListener(graph, graphFromNodeTextArea, graphToNodeTextArea, graphBlockedNodesTextArea);
+        GraphViewUtils.setLayoutForGraph(graph, graphPlaygroundPane);
 //        setGraphBFSButtonState();
     }
     private void setGraphBFSButtonState() {
@@ -99,6 +100,9 @@ public class GraphController {
     }
 
     public void onGraphBFSPlayButtonAction() {
+        // todo: fixme new animation can't be created because of logic below
+        //  after watching animation there should be ability to reset/remove animation
+        //  so new From/To/Blocked/[Other NodeType's] are used
         if (graphSequentialTransition == null) {
             graphSequentialTransition = BreadthFirstTraversal.execute(graph, graphFindPathCheckBox.isSelected(), graphUseBlockedNodesCheckBox.isSelected());
             graphSequentialTransition.getChildren().forEach(animation -> animation.setDelay(Duration.millis(300)));
