@@ -10,8 +10,8 @@ module com.example.javafxdemo {
 
     opens com.example.javafxdemo to javafx.fxml;
     opens com.example.javafxdemo.controller to javafx.fxml;
-    opens com.example.javafxdemo.service.graph to com.google.gson;
     opens com.example.javafxdemo.handler to javafx.fxml;
-    opens com.example.javafxdemo.service.graph.reader to com.google.gson;
-    opens com.example.javafxdemo.service.graph.mapper to com.google.gson;
+    opens com.example.javafxdemo.graph.reader to com.google.gson;
+    opens com.example.javafxdemo.graph.mapper to com.google.gson;
+    opens com.example.javafxdemo.graph to com.google.gson;
 }

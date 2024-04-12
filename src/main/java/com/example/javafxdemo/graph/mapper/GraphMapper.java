@@ -1,7 +1,7 @@
-package com.example.javafxdemo.service.graph.mapper;
+package com.example.javafxdemo.graph.mapper;
 
 import com.example.javafxdemo.model.Node;
-import com.example.javafxdemo.service.graph.reader.JsonNode;
+import com.example.javafxdemo.graph.reader.JsonNode;
 
 public class GraphMapper {
     public Node[] map(JsonNode[] jsonNodes) {

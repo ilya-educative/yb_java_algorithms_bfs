@@ -1,4 +1,4 @@
-package com.example.javafxdemo.service.graph.reader;
+package com.example.javafxdemo.graph.reader;
 
 public class JsonGraph {
     public final JsonNode[] nodes;

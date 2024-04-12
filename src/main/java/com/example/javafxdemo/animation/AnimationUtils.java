@@ -3,7 +3,7 @@ package com.example.javafxdemo.animation;
 import com.example.javafxdemo.event.EventManager;
 import com.example.javafxdemo.event.ConsoleMessageEvent;
 import com.example.javafxdemo.model.NodeType;
-import com.example.javafxdemo.view.GraphViewUtils;
+import com.example.javafxdemo.graph.view.GraphViewUtils;
 import javafx.animation.Animation;
 import javafx.animation.FillTransition;
 import javafx.animation.Transition;

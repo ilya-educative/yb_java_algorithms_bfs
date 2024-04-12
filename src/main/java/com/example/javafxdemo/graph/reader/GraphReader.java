@@ -1,4 +1,4 @@
-package com.example.javafxdemo.service.graph.reader;
+package com.example.javafxdemo.graph.reader;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;

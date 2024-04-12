@@ -1,4 +1,4 @@
-package com.example.javafxdemo.view;
+package com.example.javafxdemo.graph.view;
 
 import com.example.javafxdemo.model.Node;
 import javafx.scene.layout.Pane;

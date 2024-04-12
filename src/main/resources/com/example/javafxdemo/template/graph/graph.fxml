@@ -25,17 +25,17 @@
                     <CheckBox fx:id="useBlockedNodesCheckBox" layoutX="9.0" layoutY="252.0" mnemonicParsing="false" text="Use blocked Nodes?" />
                     <Label layoutX="4.0" layoutY="184.0" text="From: " />
                     <Label layoutX="11.0" layoutY="211.0" text="To: " />
-                    <TextField fx:id="fromNodeTextArea" editable="false" layoutX="43.0" layoutY="179.0" prefHeight="26.0" prefWidth="90.0" promptText="Ctrl+Left Mouse" text="null">
+                    <TextField fx:id="fromNodeTextArea" editable="false" layoutX="43.0" layoutY="179.0" prefHeight="26.0" prefWidth="90.0" promptText="Ctrl+Left Mouse">
                         <font>
                             <Font size="10.0" />
                         </font>
                     </TextField>
-                    <TextField fx:id="toNodeTextArea" editable="false" layoutX="43.0" layoutY="206.0" prefHeight="26.0" prefWidth="90.0" promptText="Ctrl+Right Mouse" text="null">
+                    <TextField fx:id="toNodeTextArea" editable="false" layoutX="43.0" layoutY="206.0" prefHeight="26.0" prefWidth="90.0" promptText="Ctrl+Right Mouse">
                         <font>
                             <Font size="10.0" />
                         </font>
                     </TextField>
-                    <TextField fx:id="blockedNodesTextArea" editable="false" layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="90.0" promptText="Shift+Left Mouse" text="null">
+                    <TextField fx:id="blockedNodesTextArea" editable="false" layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="90.0" promptText="Shift+Left Mouse">
                         <font>
                             <Font size="10.0" />
                         </font>

@@ -1,10 +1,10 @@
-package com.example.javafxdemo.service.graph.bfs;
+package com.example.javafxdemo.graph.bfs;
 
 import com.example.javafxdemo.animation.AnimationUtils;
 import com.example.javafxdemo.model.Node;
 import com.example.javafxdemo.model.NodeType;
-import com.example.javafxdemo.view.GraphViewUtils;
-import com.example.javafxdemo.view.NodeView;
+import com.example.javafxdemo.graph.view.GraphViewUtils;
+import com.example.javafxdemo.graph.view.NodeView;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
 

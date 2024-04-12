@@ -1,10 +1,10 @@
 package com.example.javafxdemo.controller;
 
 import com.example.javafxdemo.model.Node;
-import com.example.javafxdemo.service.graph.bfs.BreadthFirstSearch;
-import com.example.javafxdemo.service.graph.GraphService;
-import com.example.javafxdemo.view.GraphViewUtils;
-import com.example.javafxdemo.view.NodeView;
+import com.example.javafxdemo.graph.bfs.BreadthFirstSearch;
+import com.example.javafxdemo.graph.GraphService;
+import com.example.javafxdemo.graph.view.GraphViewUtils;
+import com.example.javafxdemo.graph.view.NodeView;
 import javafx.animation.SequentialTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
