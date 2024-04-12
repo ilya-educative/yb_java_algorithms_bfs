@@ -1,4 +1,4 @@
-package com.example.javafxdemo.controller;
+package com.example.javafxdemo.graph.controller;
 
 import com.example.javafxdemo.model.Node;
 import com.example.javafxdemo.graph.bfs.BreadthFirstSearch;
