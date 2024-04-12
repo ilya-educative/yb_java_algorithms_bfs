@@ -2,6 +2,7 @@ package com.example.javafxdemo.view;
 
 import com.example.javafxdemo.model.Node;
 import com.example.javafxdemo.model.NodeType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -90,19 +91,16 @@ public class GraphViewUtils {
     public static void graphAddNodeViewOnClickListener(Map<Node, NodeView> graph, TextField graphFromNodeTextArea, TextField graphToNodeTextArea, TextField graphBlockedNodesTextArea) {
         graph.values().forEach(nodeView -> nodeView.setOnMousePressed(event -> {
             if (event.isControlDown() && event.isPrimaryButtonDown()) {
-                System.out.println("Ctrl + Left click");
                 GraphViewUtils.resetPreviousFromNode(graph);
                 nodeView.node.type = NodeType.From;
                 nodeView.circle.setFill(GraphViewUtils.getCircleColor(NodeType.From));
                 graphFromNodeTextArea.setText(nodeView.node.toString());
             } else if (event.isControlDown() && event.isSecondaryButtonDown()) {
-                System.out.println("Ctrl + Right click");
                 GraphViewUtils.resetPreviousToNode(graph);
                 nodeView.node.type = NodeType.To;
                 nodeView.circle.setFill(GraphViewUtils.getCircleColor(NodeType.To));
                 graphToNodeTextArea.setText(nodeView.node.toString());
             } else if (event.isShiftDown() && event.isPrimaryButtonDown()){
-                System.out.println("Shift + Left click");
                 if (nodeView.node.type == NodeType.Blocked) {
                     nodeView.node.type = NodeType.Common;
                     nodeView.circle.setFill(GraphViewUtils.getCircleColor(NodeType.Common));
@@ -141,6 +139,21 @@ public class GraphViewUtils {
             node.type = NodeType.Common;
             toNodeView.circle.setFill(GraphViewUtils.getCircleColor(node.type));
         });
+    }
+
+    public static void clearNodes(Map<Node, NodeView> graph, TextField fromNodeTextArea, TextField toNodeTextArea, TextField blockedNodesTextArea, CheckBox findPathCheckBox, CheckBox useBlockedNodesCheckBox) {
+        graph.values().forEach(nodeView -> {
+            nodeView.node.type = NodeType.Common;
+            nodeView.circle.setFill(getCircleColor(nodeView.node.type));
+        });
+        fromNodeTextArea.setText(null);
+        fromNodeTextArea.setPromptText("Ctrl+Left Mouse");
+        toNodeTextArea.setText(null);
+        toNodeTextArea.setPromptText("Ctrl+Right Mouse");
+        blockedNodesTextArea.setText(null);
+        blockedNodesTextArea.setPromptText("Shift+Left Mouse");
+        findPathCheckBox.setSelected(false);
+        useBlockedNodesCheckBox.setSelected(false);
     }
 
     public static Node getFromAnyNode(Map<Node, NodeView> graph) {

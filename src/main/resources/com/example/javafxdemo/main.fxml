@@ -9,56 +9,6 @@
     <TabPane prefHeight="500.0" prefWidth="655.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="Graph">
             <fx:include source="template/graph/graph.fxml"/>
-            <!--            <content>-->
-            <!--              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">-->
-            <!--                     <children>-->
-            <!--                        <ScrollPane fx:id="graphPlaygroundScrollPane" layoutX="14.0" layoutY="14.0" prefHeight="450.0" prefWidth="465.0">-->
-            <!--                           <content>-->
-            <!--                              <Pane fx:id="graphPlaygroundPane" prefHeight="450.0" prefWidth="465.0" />-->
-            <!--                           </content>-->
-            <!--                        </ScrollPane>-->
-            <!--                        <Accordion layoutX="489.0" layoutY="14.0" prefHeight="407.0" prefWidth="151.0">-->
-            <!--                          <panes>-->
-            <!--                            <TitledPane animated="false" text="Algorithm Settings">-->
-            <!--                              <content>-->
-            <!--                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">-->
-            <!--                                       <children>-->
-            <!--                                          <TextArea fx:id="graphDragAndDropTextArea" editable="false" focusTraversable="false" layoutX="11.0" layoutY="14.0" prefHeight="96.0" prefWidth="127.0" text="Click or Drag and Drop file here ... " wrapText="true" />-->
-            <!--                                          <CheckBox fx:id="graphFindPathCheckBox" layoutX="11.0" layoutY="160.0" mnemonicParsing="false" text="Find Path?" />-->
-            <!--                                          <CheckBox fx:id="graphUseBlockedNodesCheckBox" layoutX="9.0" layoutY="252.0" mnemonicParsing="false" text="Use blocked Nodes?" />-->
-            <!--                                          <Label layoutX="4.0" layoutY="184.0" text="From: " />-->
-            <!--                                          <Label layoutX="11.0" layoutY="211.0" text="To: " />-->
-            <!--                                          <TextField fx:id="graphFromNodeTextArea" editable="false" layoutX="43.0" layoutY="179.0" prefHeight="26.0" prefWidth="90.0" promptText="Ctrl+Left Mouse" text="null">-->
-            <!--                                             <font>-->
-            <!--                                                <Font size="10.0" />-->
-            <!--                                             </font>-->
-            <!--                                          </TextField>-->
-            <!--                                          <TextField fx:id="graphToNodeTextArea" editable="false" layoutX="43.0" layoutY="206.0" prefHeight="26.0" prefWidth="90.0" promptText="Ctrl+Right Mouse" text="null">-->
-            <!--                                             <font>-->
-            <!--                                                <Font size="10.0" />-->
-            <!--                                             </font>-->
-            <!--                                          </TextField>-->
-            <!--                                          <TextField fx:id="graphBlockedNodesTextArea" editable="false" layoutX="43.0" layoutY="270.0" prefHeight="26.0" prefWidth="90.0" promptText="Shift+Left Mouse" text="null">-->
-            <!--                                             <font>-->
-            <!--                                                <Font size="10.0" />-->
-            <!--                                             </font>-->
-            <!--                                          </TextField>-->
-            <!--                                       </children>-->
-            <!--                                    </AnchorPane>-->
-            <!--                              </content>-->
-            <!--                            </TitledPane>-->
-            <!--                            <TitledPane animated="false" text="Animation Settings">-->
-            <!--                              <content>-->
-            <!--                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />-->
-            <!--                              </content>-->
-            <!--                            </TitledPane>-->
-            <!--                          </panes>-->
-            <!--                        </Accordion>-->
-            <!--                        <Button fx:id="graphBFSButton" layoutX="486.0" layoutY="432.0" mnemonicParsing="false" onAction="#onGraphBFSPlayButtonAction" prefHeight="26.0" prefWidth="153.0" text="Play" />-->
-            <!--                     </children>-->
-            <!--                  -->
-            <!--              </AnchorPane>-->
-            <!--            </content>-->
         </Tab>
         <Tab text="Matrix">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
@@ -67,13 +17,6 @@
     <TabPane layoutY="500.0" prefHeight="155.0" prefWidth="655.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="Console">
             <fx:include source="template/shared/console.fxml"/>
-            <!--               <content>-->
-            <!--                  <ScrollPane prefHeight="200.0" prefWidth="200.0">-->
-            <!--                     <content>-->
-            <!--                         <TextArea fx:id="consoleTextArea" editable="false" prefHeight="125.0" prefWidth="655.0" />-->
-            <!--                     </content>-->
-            <!--                  </ScrollPane>-->
-            <!--               </content>-->
         </Tab>
         <Tab text="Untitled Tab 2">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>

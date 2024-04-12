@@ -18,7 +18,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BreadthFirstTraversal {
+public class BreadthFirstSearch {
     public static SequentialTransition execute(Map<Node, NodeView> graph, boolean findPath, boolean useBlockedNodes) {
         clearVisitedNodes(graph.keySet());
 
