@@ -1,7 +1,7 @@
 package com.example.javafxdemo.controller;
 
 import com.example.javafxdemo.model.Node;
-import com.example.javafxdemo.service.bfs.BreadthFirstTraversal;
+import com.example.javafxdemo.service.graph.bfs.BreadthFirstTraversal;
 import com.example.javafxdemo.service.graph.GraphService;
 import com.example.javafxdemo.view.GraphViewUtils;
 import com.example.javafxdemo.view.NodeView;
@@ -34,7 +34,6 @@ public class GraphController {
 //        setGraphBFSButtonState();
     }
 
-    /* Graph */
     private final GraphService graphService;
     private final Map<Node, NodeView> graph = new HashMap<>();
     private SequentialTransition graphSequentialTransition;

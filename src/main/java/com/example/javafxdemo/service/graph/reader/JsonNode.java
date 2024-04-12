@@ -1,6 +1,6 @@
-package com.example.javafxdemo.service.graph;
+package com.example.javafxdemo.service.graph.reader;
 
-class JsonNode {
+public class JsonNode {
     public final char node;
     public final char[] neighbours;
 

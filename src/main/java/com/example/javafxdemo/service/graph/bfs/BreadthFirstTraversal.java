@@ -1,4 +1,4 @@
-package com.example.javafxdemo.service.bfs;
+package com.example.javafxdemo.service.graph.bfs;
 
 import com.example.javafxdemo.animation.AnimationUtils;
 import com.example.javafxdemo.model.Node;
@@ -32,6 +32,7 @@ public class BreadthFirstTraversal {
 
         Node from;
         Node to = null;
+        boolean pathFound = false;
         if (findPath) {
             from = GraphViewUtils.getFromNode(graph).orElseThrow();
             to = GraphViewUtils.getToNode(graph).orElseThrow();
@@ -55,6 +56,12 @@ public class BreadthFirstTraversal {
             sequentialTransition.getChildren().add(AnimationUtils.fillCircle(graph.get(node).circle, NodeType.Visited));
 
             for (Node neighbour : node.neighbours) {
+                if (useBlockedNodes && neighbour.type == NodeType.Blocked) {
+                    sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(blockedNodeMessage(neighbour)));
+                    sequentialTransition.getChildren().add(AnimationUtils.fillCircle(graph.get(neighbour).circle, NodeType.Blocked));
+                    continue;
+                }
+
                 if (!visited.contains(neighbour)) {
                     queue.offer(neighbour);
                     visited.add(neighbour);
@@ -63,6 +70,7 @@ public class BreadthFirstTraversal {
                 }
 
                 if (findPath && neighbour.equals(to)) {
+                    pathFound = true;
                     List<Node> path = buildPath(neighbour, graph, sequentialTransition);
                     sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(finalPathMessage(path)));
                     break OuterWhile;
@@ -70,6 +78,9 @@ public class BreadthFirstTraversal {
             }
             sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(neighboursMessage(node, List.of(node.neighbours))));
             sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(unvisitedNodesMessage(queue)));
+        }
+        if (findPath && !pathFound) {
+            sequentialTransition.getChildren().add(AnimationUtils.graduallySetText(pathNotFoundMessage(from, to)));
         }
         return sequentialTransition;
     }
@@ -120,5 +131,11 @@ public class BreadthFirstTraversal {
                 .map(Node::toString)
                 .collect(Collectors.joining("', '", "['", "']"));
         return String.format("Final path %s", finalPath);
+    }
+    private static String blockedNodeMessage(Node node) {
+        return String.format("Node '%s' can't be visited because it is blocked", node);
+    }
+    private static String pathNotFoundMessage(Node from, Node to) {
+        return String.format("Path from '%s' to '%s' not found", from, to);
     }
 }

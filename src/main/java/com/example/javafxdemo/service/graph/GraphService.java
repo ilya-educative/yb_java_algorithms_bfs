@@ -1,6 +1,9 @@
 package com.example.javafxdemo.service.graph;
 
 import com.example.javafxdemo.model.Node;
+import com.example.javafxdemo.service.graph.mapper.GraphMapper;
+import com.example.javafxdemo.service.graph.reader.GraphReader;
+import com.example.javafxdemo.service.graph.reader.JsonGraph;
 
 public class GraphService {
     private final GraphReader graphReader;
